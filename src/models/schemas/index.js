@@ -1,7 +1,11 @@
 export default `
+  scalar Date
+
   type Tweet {
     _id: String
     text: String
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type Status {
