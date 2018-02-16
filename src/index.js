@@ -3,10 +3,14 @@ import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 import dotenv from 'dotenv';
 
+import db from './config/db';
+
 dotenv.config();
 
 const app = new Koa();
 const port = process.env.PORT || 8080;
+
+db();
 
 app.use(bodyParser());
 app.use(logger());
