@@ -1,5 +1,6 @@
 import GraphqlDate from 'graphql-date';
 import tweetResolver from './tweet-resolver';
+import userResolver from './user-resolver';
 
 export default {
   Date: GraphqlDate,
@@ -11,5 +12,6 @@ export default {
     updateTweet: tweetResolver.updateTweet,
     createTweet: tweetResolver.createTweet,
     deleteTweet: tweetResolver.deleteTweet,
+    signup: userResolver.signup,
   },
 };
