@@ -1,9 +1,8 @@
 import User from '../mongo/user';
+import { requireAuth } from '../../services/auth';
 
 export default {
-  signup: (_, {
-    fullName, username, password, email, avatar,
-  }) => {
+  signup: (_, { fullName, username, password, email, avatar }) => {
     const [firstName, ...lastName] = fullName.split(' ');
     return User.create({
       firstName,
@@ -26,5 +25,8 @@ export default {
     }
 
     return user;
+  },
+  getCurrentUser: async (_, args, { user }) => {
+    return await requireAuth(user);
   },
 };

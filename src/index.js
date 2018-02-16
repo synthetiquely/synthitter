@@ -7,6 +7,7 @@ import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 import { makeExecutableSchema } from 'graphql-tools';
 
 import db from './config/db';
+import { auth } from './config/middlewares';
 import typeDefs from './models/schemas';
 import resolvers from './models/resolvers';
 
@@ -20,13 +21,30 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-router.post('/graphql', graphqlKoa({ schema }));
-router.get('/graphql', graphqlKoa({ schema }));
+router.post(
+  '/graphql',
+  graphqlKoa(ctx => ({
+    schema,
+    context: {
+      user: ctx.user,
+    },
+  })),
+);
+router.get(
+  '/graphql',
+  graphqlKoa(ctx => ({
+    schema,
+    context: {
+      user: ctx.user,
+    },
+  })),
+);
 router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 
 db();
 
 app.use(bodyParser());
+app.use(auth);
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(logger());

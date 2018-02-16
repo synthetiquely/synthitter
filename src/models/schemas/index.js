@@ -26,6 +26,7 @@ export default `
   type Query {
     getTweet(_id: ID!): Tweet
     getTweets: [Tweet]
+    getCurrentUser: User
   }
 
   type Mutation {
