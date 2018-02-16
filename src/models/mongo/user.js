@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { hashSync } from 'bcrypt-nodejs';
+import { hashSync, compareSync } from 'bcrypt-nodejs';
 
 const UserSchema = new Schema(
   {
@@ -26,10 +26,11 @@ UserSchema.pre('save', function (next) {
   return next();
 });
 
-UserSchema.methods = {
-  hashPassword(password) {
-    return hashSync(password);
-  },
+UserSchema.methods.hashPassword = function hashPassword(password) {
+  return hashSync(password);
+};
+UserSchema.methods.comparePasswords = function comparePasswords(password) {
+  return compareSync(password, this.password);
 };
 
 export default mongoose.model('User', UserSchema);

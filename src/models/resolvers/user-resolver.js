@@ -6,7 +6,25 @@ export default {
   }) => {
     const [firstName, ...lastName] = fullName.split(' ');
     return User.create({
-      firstName, lastName, username, email, password, avatar,
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      avatar,
     });
+  },
+  signin: async (_, { email, password }) => {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw new Error("User doesn't exist");
+    }
+
+    if (!user.comparePasswords(password)) {
+      throw new Error('Passwords do not match');
+    }
+
+    return user;
   },
 };
