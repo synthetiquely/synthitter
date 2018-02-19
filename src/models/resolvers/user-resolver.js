@@ -24,7 +24,9 @@ export default {
       throw new Error('Passwords do not match');
     }
 
-    return user;
+    const token = user.createToken();
+
+    return token;
   },
   getCurrentUser: async (_, args, { user }) => {
     return await requireAuth(user);
