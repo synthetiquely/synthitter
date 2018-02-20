@@ -2,6 +2,7 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 import Router from 'koa-router';
+import cors from '@koa/cors';
 import dotenv from 'dotenv';
 import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -43,8 +44,9 @@ router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 
 db();
 
+app.use(cors());
 app.use(bodyParser());
-app.use(auth);
+// app.use(auth);
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(logger());

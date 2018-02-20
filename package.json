@@ -10,6 +10,7 @@
     "start": "nodemon --exec babel-node src/index.js"
   },
   "dependencies": {
+    "@koa/cors": "2",
     "apollo-server-koa": "^1.3.2",
     "bcrypt-nodejs": "^0.0.3",
     "dotenv": "^5.0.0",

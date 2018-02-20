@@ -17,12 +17,18 @@ export default `
     firstName: String
     lastName: String
     avatar: String
+    cover: String
     createdAt: Date!
     updatedAt: Date!
   }
 
   type Status {
     message: String!
+  }
+
+  type AuthInfo {
+    user: User!
+    token: String!
   }
 
   type Query {
@@ -37,7 +43,7 @@ export default `
     updateTweet(_id: ID!, text: String): Tweet
     deleteTweet(_id: ID!): Status
     signup(email: String!, fullName: String!, password: String!, avatar: String!, username: String!): User
-    signin(email: String!, password: String!): String
+    signin(email: String!, password: String!): AuthInfo
   }
 
   schema {

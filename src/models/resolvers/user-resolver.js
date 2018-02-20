@@ -26,7 +26,10 @@ export default {
 
     const token = user.createToken();
 
-    return token;
+    return {
+      user,
+      token
+    };
   },
   getCurrentUser: async (_, args, { user }) => {
     return await requireAuth(user);
