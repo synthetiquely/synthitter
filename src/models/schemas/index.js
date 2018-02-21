@@ -2,8 +2,8 @@ export default `
   scalar Date
 
   type Tweet {
-    _id: String
-    text: String
+    _id: String!
+    text: String!
     user: User!
     favoriteCount: Int!
     createdAt: Date!
@@ -12,7 +12,7 @@ export default `
 
   type User {
     _id: ID!
-    username: String
+    username: String!
     email: String
     firstName: String
     lastName: String

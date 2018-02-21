@@ -1,4 +1,6 @@
 import { decodeToken } from '../services/auth';
+import multer from 'koa-multer';
+
 export const auth = async (ctx, next) => {
   try {
     const authHeader = ctx.headers['authorization'];
@@ -20,3 +22,11 @@ export const auth = async (ctx, next) => {
     throw error;
   }
 };
+
+const storage = multer.memoryStorage();
+export const upload = multer({
+  storage,
+  limits: {
+    fileSize: 2 * 1024 * 1024, // 2 MB
+  },
+});
